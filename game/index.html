@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ashen Crown — Duel of the Four Embers</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div id="app">
+  <div id="screen-title" class="screen">
+    <div class="title-crown" aria-hidden="true">♛</div>
+    <h1 class="title-name">ASHEN CROWN</h1>
+    <p class="title-sub">Duel of the Four Embers</p>
+    <p class="title-story">You are the Warden of the Ashen Crown. Across the candle-lit hall,
+      Duchess Cinder waits with a deck of burning cards. First to 0 life loses the crown.</p>
+    <div class="title-cards" id="title-cards" aria-hidden="true"></div>
+    <button id="btn-start" class="btn big">Begin the Duel</button>
+    <p class="title-hint">Click a card to play it · Keys 1–7 play a card · Space ends your turn · R restarts · H help · M mute</p>
+    <p class="title-rules">Flame ▲ beats Gale 🍃 beats Stone ◆ beats Tide 💧 beats Flame ▲ — play two cards of one
+      element in a turn to Surge (+2). Watch the Duchess's intent and answer it.</p>
+  </div>
+
+  <div id="screen-game" class="screen" hidden>
+    <header class="topbar">
+      <div class="brand">♛ ASHEN CROWN</div>
+      <div class="score-line" id="score-line"></div>
+      <div class="top-buttons">
+        <button id="btn-help" class="btn small" title="Help (H)">Help</button>
+        <button id="btn-mute" class="btn small" title="Mute (M)">Sound: On</button>
+        <button id="btn-restart" class="btn small" title="Restart (R)">Restart</button>
+      </div>
+    </header>
+
+    <section id="rival-zone">
+      <div class="duelist rival">
+        <div class="portrait rival-portrait">♛</div>
+        <div class="duelist-info">
+          <div class="duelist-name">Duchess Cinder</div>
+          <div class="life-row"><span class="heart">♥</span><span class="life-num" id="rival-life">30</span>
+            <div class="life-bar"><div class="life-fill" id="rival-life-fill"></div></div>
+            <span class="shield-badge" id="rival-shield"></span>
+          </div>
+          <div class="ember-row" id="rival-embers"></div>
+        </div>
+        <div class="rival-hand" id="rival-hand"></div>
+      </div>
+      <div class="intent-banner" id="intent-banner"></div>
+    </section>
+
+    <section id="table-zone">
+      <div class="played-area" id="played-area"></div>
+      <aside class="log-panel">
+        <div class="log-title">Duel Log</div>
+        <div class="log" id="log"></div>
+      </aside>
+    </section>
+
+    <section id="player-zone">
+      <div class="player-top">
+        <div class="duelist player">
+          <div class="portrait player-portrait">♔</div>
+          <div class="duelist-info">
+            <div class="duelist-name">You — Warden of the Crown</div>
+            <div class="life-row"><span class="heart">♥</span><span class="life-num" id="player-life">30</span>
+              <div class="life-bar"><div class="life-fill" id="player-life-fill"></div></div>
+              <span class="shield-badge" id="player-shield"></span>
+            </div>
+            <div class="ember-row" id="player-embers"></div>
+            <div class="deck-counts" id="deck-counts"></div>
+          </div>
+        </div>
+        <div class="action-row">
+          <button id="btn-end-turn" class="btn big">End Turn <span class="key">Space</span></button>
+          <div class="turn-label" id="turn-label"></div>
+        </div>
+      </div>
+      <div class="hand-row" id="hand-row"></div>
+    </section>
+  </div>
+
+  <div id="screen-end" class="screen overlay" hidden>
+    <div class="end-panel">
+      <h1 id="end-title">Victory</h1>
+      <p id="end-story"></p>
+      <div class="end-stats" id="end-stats"></div>
+      <button id="btn-again" class="btn big">Duel Again (R)</button>
+    </div>
+  </div>
+
+  <div id="help-overlay" class="screen overlay" hidden>
+    <div class="end-panel help-panel">
+      <h1>How to Duel</h1>
+      <ul class="help-list">
+        <li><b>Goal:</b> reduce Duchess Cinder to 0 life before she does the same to you. You both start at 30 life.</li>
+        <li><b>Embers:</b> each turn starts with 3 embers, +1 every turn, max 8. Cards cost embers. Unspent embers vanish.</li>
+        <li><b>Cards:</b> Strike deals damage · Guard gains shield · Mend restores life · Trick has a special effect.</li>
+        <li><b>Surge:</b> play two cards of the same element in one turn — the second gets +2 (Wildfire gets +3).</li>
+        <li><b>Advantage:</b> Flame ▲ &gt; Gale 🍃 &gt; Stone ◆ &gt; Tide 💧 &gt; Flame ▲. A Strike deals +1 when its element beats the rival's last played element.</li>
+        <li><b>Intent:</b> the banner shows what the Duchess plans to play. Guard or Mend to answer a Strike.</li>
+        <li><b>Shield:</b> absorbs damage, then clears at the start of its owner's next turn. Heal never passes 30 life.</li>
+        <li><b>Controls:</b> click a card (or keys 1–7) to play it · Space ends your turn · R restarts · H help · M mute.</li>
+      </ul>
+      <button id="btn-close-help" class="btn big">Close (H)</button>
+    </div>
+  </div>
+
+  <div id="float-layer" aria-hidden="true"></div>
+  <p id="status" role="status" aria-live="polite"></p>
+</div>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
